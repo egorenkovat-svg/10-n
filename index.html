@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#53c3e9" />
+    <title>10-numbers</title>
+    <link rel="icon" type="image/png" href="./assets/game-icon.png" />
+    <link rel="apple-touch-icon" href="./assets/game-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section class="game-launcher" id="gameLauncher" aria-labelledby="launcherTitle">
+      <button class="game-launch-button" id="gameLaunchButton" type="button">
+        <img src="./assets/game-icon.png" alt="" />
+        <strong id="launcherTitle">10-numbers</strong>
+        <span>Нажмите, чтобы играть</span>
+      </button>
+    </section>
+
+    <section class="game-panel" aria-labelledby="gameTitle">
+      <div class="game-topbar">
+        <div>
+          <p class="game-kicker">Математическая игра</p>
+          <h2 id="gameTitle">10-numbers</h2>
+        </div>
+        <label class="player-name-field">
+          <span>Игрок 1</span>
+          <input id="playerNameInput" type="text" maxlength="20" placeholder="Введите имя" autocomplete="name" />
+        </label>
+        <button class="toggle-competitors" id="toggleCompetitorsButton" type="button" aria-pressed="false">Скрыть соперников</button>
+      </div>
+
+      <div class="problem" aria-label="Пример на вычитание">
+        <strong id="minuend">42</strong>
+        <span>−</span>
+        <strong id="subtrahend">7</strong>
+        <span>=</span>
+        <input id="answerInput" type="text" inputmode="numeric" placeholder="?" readonly aria-label="Ответ" />
+      </div>
+      <p class="game-feedback" id="gameFeedback" aria-live="polite">Нажмите на поле и введите ответ</p>
+    </section>
+
+    <main class="timer-card">
+      <header>
+        <p class="eyebrow">Обратный отсчёт</p>
+        <h1>60 секунд</h1>
+      </header>
+
+      <div class="stopwatch" aria-hidden="true">
+        <div class="top-button"></div>
+        <div class="side-button"></div>
+        <div class="case">
+          <div class="dial">
+            <div class="hand" id="hand"></div>
+            <div class="center-pin"></div>
+            <span class="dial-number n60">60</span>
+            <span class="dial-number n15">15</span>
+            <span class="dial-number n30">30</span>
+            <span class="dial-number n45">45</span>
+            <strong class="time" id="timeDisplay">60</strong>
+          </div>
+        </div>
+      </div>
+
+      <p class="status" id="statusText" aria-live="polite">Нажмите на поле ответа, чтобы начать</p>
+    </main>
+
+    <section class="progress-panel" aria-label="Индикатор правильных ответов">
+      <div class="score-progress" id="scoreProgress" role="progressbar" aria-label="Правильные ответы" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+        <span class="rank-badge" id="playerRank">1st</span>
+        <div class="score-progress-fill" id="scoreProgressFill">
+          <strong id="correctCount">0</strong>
+        </div>
+        <img class="runner-icon" src="./assets/boy-runner.png" alt="" />
+        <span class="player-name-badge" id="playerNameBadge">Игрок 1</span>
+      </div>
+      <div class="score-progress competitor-progress" id="competitorProgress" role="progressbar" aria-label="Правильные ответы соперника" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+        <span class="rank-badge" id="competitorRank">2nd</span>
+        <div class="score-progress-fill competitor-progress-fill" id="competitorProgressFill">
+          <strong id="competitorCount">0</strong>
+        </div>
+        <img class="runner-icon competitor-icon" src="./assets/competitor-boy.png" alt="" />
+      </div>
+      <div class="score-progress third-progress" id="thirdProgress" role="progressbar" aria-label="Правильные ответы второго соперника" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+        <span class="rank-badge" id="thirdRank">3rd</span>
+        <div class="score-progress-fill third-progress-fill" id="thirdProgressFill">
+          <strong id="thirdCount">0</strong>
+        </div>
+        <img class="runner-icon third-icon" src="./assets/competitor-girl.png" alt="" />
+      </div>
+    </section>
+
+    <section class="number-line-panel" aria-labelledby="numberLineTitle">
+      <div class="number-line-heading">
+        <div>
+          <p>Number line</p>
+          <h2 id="numberLineTitle">Числовая прямая</h2>
+        </div>
+        <div class="number-line-legend">
+          <span><i class="legend-start"></i> Начало</span>
+        </div>
+      </div>
+      <div class="number-line-scroll">
+        <div class="number-line" id="numberLine">
+          <div class="line-marker start-marker" id="startMarker"><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-screen" id="resultScreen" aria-labelledby="resultTitle" hidden>
+      <svg class="trophy" viewBox="0 0 180 180" role="img" aria-label="Кубок">
+        <path d="M55 25h70v35c0 34-15 54-35 54S55 94 55 60V25Z" fill="#ffd44d" stroke="#a96b00" stroke-width="7" />
+        <path d="M55 42H27v15c0 24 14 39 36 39M125 42h28v15c0 24-14 39-36 39" fill="none" stroke="#a96b00" stroke-width="9" stroke-linecap="round" />
+        <path d="M90 114v24M62 157h56M70 138h40v19H70z" fill="#ffd44d" stroke="#a96b00" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m90 45 6 13 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2 6-13Z" fill="#fff3ae" />
+      </svg>
+      <p class="result-kicker">Время вышло</p>
+      <h2 id="resultTitle">Отличная работа!</h2>
+      <p class="result-player" id="resultPlayerName">Игрок 1</p>
+      <div class="result-stats">
+        <div><strong id="finalCorrect">0</strong><span>правильных ответов</span></div>
+        <div><strong id="finalTotal">0</strong><span>всего примеров</span></div>
+      </div>
+      <div class="attempt-chart-section">
+        <h3>Результаты попыток</h3>
+        <div class="attempt-chart" id="attemptChart" aria-label="Диаграмма правильных ответов"></div>
+      </div>
+      <div class="result-actions">
+        <button id="viewAnswersButton" type="button">Все примеры</button>
+        <button id="playAgainButton" type="button">Сыграть ещё</button>
+      </div>
+    </section>
+
+    <section class="answers-screen" id="answersScreen" aria-labelledby="answersTitle" hidden>
+      <header class="answers-header">
+        <div>
+          <p>Подробный результат</p>
+          <h2 id="answersTitle">Ответы: <span id="answersPlayerName">Игрок 1</span></h2>
+        </div>
+        <button id="backToResultsButton" type="button">Назад к кубку</button>
+      </header>
+      <div class="answers-summary">
+        <span>Правильно: <strong id="reportCorrect">0</strong></span>
+        <span>Всего: <strong id="reportTotal">0</strong></span>
+      </div>
+      <div class="answers-table" role="table" aria-label="Список решённых примеров">
+        <div class="answers-table-head" role="row">
+          <span role="columnheader">Пример и ответ</span>
+          <span role="columnheader">Результат</span>
+          <span role="columnheader">Исправление</span>
+        </div>
+        <div class="answers-list" id="answersList" role="rowgroup"></div>
+      </div>
+    </section>
+
+    <section class="keypad" id="keypad" aria-label="Цифровая клавиатура">
+      <div class="keypad-header">
+        <span class="drag-lines" aria-hidden="true"></span>
+        <button class="close-key" id="closeKeypadButton" type="button" aria-label="Закрыть клавиатуру">×</button>
+      </div>
+      <output class="sr-only" id="keypadDisplay" aria-live="polite">0</output>
+      <div class="keypad-grid">
+        <button type="button" data-key="7">7</button>
+        <button type="button" data-key="8">8</button>
+        <button type="button" data-key="9">9</button>
+        <button type="button" data-key="4">4</button>
+        <button type="button" data-key="5">5</button>
+        <button type="button" data-key="6">6</button>
+        <button type="button" data-key="1">1</button>
+        <button type="button" data-key="2">2</button>
+        <button type="button" data-key="3">3</button>
+        <button type="button" data-key="0">0</button>
+        <button type="button" data-action="sign" aria-label="Сменить знак">+/−</button>
+        <button type="button" data-key=".">.</button>
+        <button class="delete-key" type="button" data-action="delete" aria-label="Удалить последнюю цифру"><span>×</span></button>
+        <button class="ok-key" type="button" data-action="confirm">OK</button>
+      </div>
+      <p class="keypad-message" id="keypadMessage" aria-live="polite"></p>
+    </section>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
